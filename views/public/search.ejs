@@ -1,0 +1,26 @@
+<%- include('../partials/public/header') %>
+
+<section class='text-center mb-12'>
+    <h2 class='text-5xl md:text-7xl font-extrabold uppercase tracking-tighter'>Search Results</h2>
+    <p class='mx-auto mt-6 max-w-2xl text-lg'>
+        For the term: <span class="bg-yellow-300 px-2">'<%= query %>'</span>
+    </p>
+</section>
+
+<div class='space-y-8'>
+    <% if (snippets.length > 0) { %>
+        <% snippets.forEach(snippet => { %>
+            <%- include('../partials/public/snippet-card', {snippet: snippet}) %>
+        <% }) %>
+    <% } else { %>
+        <div class="border-2 border-black p-8 text-center">
+            <h3 class="text-3xl font-bold uppercase">No Snippets Found</h3>
+            <p class="mt-3 text-base">
+                Sorry, we couldn't find any snippets matching your search term.
+            </p>
+        </div>
+    <% } %>
+</div>
+
+<%- include('../partials/public/pagination', { pagination }) %>
+<%- include('../partials/public/footer') %>

@@ -1,0 +1,106 @@
+<aside
+  class="col-span-1 hidden lg:flex lg:flex-col border-r-4 border-black bg-neutral-50 dark:bg-gray-800 dark:border-gray-600"
+>
+  <div class="border-b-4 border-black p-6 dark:border-gray-600">
+    <h1 class="text-2xl font-bold uppercase">
+      <a
+        href="/admin/snippets"
+        class="hover:bg-yellow-300 dark:hover:text-black"
+        >SnippetDash</a
+      >
+    </h1>
+    <p class="text-sm text-neutral-600 dark:text-neutral-400">V2.0.0</p>
+  </div>
+
+  <div class="p-6 border-b-2 border-black dark:border-gray-600">
+    <h2
+      class="mb-4 text-sm uppercase text-neutral-500 dark:text-neutral-400"
+    >
+      // Theme
+    </h2>
+    <%- include('../theme-switcher') %>
+  </div>
+
+  <nav class="flex-grow p-6">
+    <h2
+      class="mb-4 text-sm uppercase text-neutral-500 dark:text-neutral-400"
+    >
+      // Main
+    </h2>
+    <ul class="space-y-3">
+      <li>
+        <a
+          href="/admin/snippets"
+          class="block p-2 font-bold uppercase hover:bg-yellow-300 dark:hover:text-black"
+        >
+          Snippets
+        </a>
+      </li>
+      
+      <% if (session.user.is_admin) { %>
+      <li>
+        <a
+          href="/admin/categories"
+          class="block p-2 font-bold uppercase hover:bg-yellow-300 dark:hover:text-black"
+        >
+          Categories
+        </a>
+      </li>
+      <li>
+        <a
+          href="/admin/languages"
+          class="block p-2 font-bold uppercase hover:bg-yellow-300 dark:hover:text-black"
+        >
+          Languages
+        </a>
+      </li>
+      <% } %>
+    </ul>
+  </nav>
+
+  <nav class="p-6 border-t-2 border-black dark:border-gray-600">
+    <h2
+      class="mb-4 text-sm uppercase text-neutral-500 dark:text-neutral-400"
+    >
+      // Account
+    </h2>
+    <ul class="space-y-3">
+      <li>
+        <a
+          href="/admin/profile"
+          class="block p-2 font-bold uppercase hover:bg-yellow-300 dark:hover:text-black"
+          >My Profile</a
+        >
+      </li>
+
+      <% if (session.user.is_admin) { %>
+      <li>
+        <a
+          href="/admin/users/create"
+          class="block p-2 font-bold uppercase hover:bg-yellow-300 dark:hover:text-black"
+          >Create User</a
+        >
+      </li>
+      <li>
+        <a
+          href="/admin/users"
+          class="block p-2 font-bold uppercase hover:bg-yellow-300 dark:hover:text-black"
+          >Manage Users</a
+        >
+      </li>
+      <% } %>
+    </ul>
+  </nav>
+
+  <div class="mt-auto border-t-2 border-black p-6 dark:border-gray-600">
+    <div>
+      <p class="font-bold">LOGGED IN AS: <%= session.user.username %></p>
+      <a
+        href="/admin/logout"
+        class="text-sm underline hover:bg-yellow-300 dark:hover:text-black"
+      >
+        LOGOUT
+      </a>
+    </div>
+  </div>
+</aside>

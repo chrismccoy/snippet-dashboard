@@ -1,0 +1,103 @@
+<aside class="h-fit space-y-8 lg:col-span-1 lg:sticky lg:top-8">
+  <div class="border-2 border-black p-6">
+    <h3 class="mb-4 text-xl font-bold uppercase">// Search</h3>
+    <form action="/search" method="GET" class="flex gap-2" id="search-form">
+      <input
+        type="text"
+        name="q"
+        required
+        class="w-full border-2 border-black bg-white p-3 text-base focus:outline-none focus:ring-4 focus:ring-yellow-300"
+      />
+      <button
+        type="submit"
+        class="border-2 border-black bg-yellow-300 px-4 py-2 font-bold uppercase text-black"
+      >
+        Go
+      </button>
+    </form>
+  </div>
+
+  <% if (sidebar.recentSnippets && sidebar.recentSnippets.length > 0) { %>
+  <div class="border-2 border-black">
+    <h3 class="bg-black p-4 text-xl font-bold uppercase text-yellow-300">
+      // Recent Snippets
+    </h3>
+    <ul class="space-y-4 p-6">
+      <% sidebar.recentSnippets.forEach(snippet => { %>
+      <% const snippetUrl = urlStyle === 'shortid' && snippet.short_id ? snippet.short_id : snippet.slug; %>
+      <li>
+        <a
+          href="/<%= snippetUrl %>"
+          class="font-bold hover:bg-yellow-300"
+          ><%= snippet.title %></a
+        >
+      </li>
+      <% }) %>
+    </ul>
+  </div>
+  <% } %>
+
+  <% if (sidebar.allCategories && sidebar.allCategories.length > 0) { %>
+  <div class="border-2 border-black">
+    <h3 class="bg-black p-4 text-xl font-bold uppercase text-yellow-300">
+      // Categories
+    </h3>
+    <ul class="space-y-3 p-6">
+      <% sidebar.allCategories.forEach(category => { %>
+      <li>
+        <a
+          href="/category/<%= category.slug %>"
+          class="flex items-center justify-between"
+        >
+          <span class="font-bold uppercase hover:bg-yellow-300"
+            ><%= category.name %></span
+          >
+          <span class="border border-black px-1 text-xs"><%= category.count %></span>
+        </a>
+      </li>
+      <% }) %>
+    </ul>
+  </div>
+  <% } %>
+
+  <% if (sidebar.allTags && sidebar.allTags.length > 0) { %>
+  <div class="border-2 border-black">
+    <h3 class="bg-black p-4 text-xl font-bold uppercase text-yellow-300">
+      // Tag Cloud
+    </h3>
+    <div class="flex flex-wrap gap-2 p-6">
+      <% sidebar.allTags.forEach(tag => { %>
+      <a
+        href="/tag/<%= encodeURIComponent(tag.name) %>"
+        class="border border-black px-2 py-1 text-sm hover:bg-yellow-300"
+        ><%= tag.name %>
+        <span class="text-neutral-700"><%= tag.count %></span></a
+      >
+      <% }) %>
+    </div>
+  </div>
+  <% } %>
+
+  <% if (sidebar.allLanguages && sidebar.allLanguages.length > 0) { %>
+  <div class="border-2 border-black">
+    <h3 class="bg-black p-4 text-xl font-bold uppercase text-yellow-300">
+      // Languages
+    </h3>
+    <ul class="space-y-3 p-6">
+      <% sidebar.allLanguages.forEach(lang => { %>
+      <li>
+        <a
+          href="/language/<%= lang.slug %>"
+          class="flex items-center justify-between"
+        >
+          <span class="font-bold uppercase hover:bg-yellow-300"
+            ><%= lang.name %></span
+          >
+          <span class="border px-1 text-sm border-black"><%= lang.count %></span>
+        </a>
+      </li>
+      <% }) %>
+    </ul>
+  </div>
+  <% } %>
+</aside>

@@ -1,0 +1,28 @@
+{
+  "name": "snippet-dashboard",
+  "version": "1.0.0",
+  "description": "A multi-user, self-hosted code snippet manager with a brutalist design.",
+  "main": "server.js",
+  "scripts": {
+    "start": "npm run build:css && node server.js",
+    "build:css": "tailwindcss -i ./public/css/app.scss -o ./public/css/app.css --minify",
+    "watch:css": "tailwindcss -i ./public/css/app.scss -o ./public/css/app.css --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "connect-sqlite3": "^0.9.16",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^17.2.2",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-async-handler": "^1.2.0",
+    "express-rate-limit": "^8.1.0",
+    "express-session": "^1.18.2",
+    "short-unique-id": "^5.2.0",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

@@ -1,0 +1,163 @@
+<%- include('../partials/admin/header') %> 
+<%- include('../partials/admin/sidebar') %>
+
+<main class="col-span-1 p-4 sm:p-6 lg:col-span-4 lg:p-8">
+  <header class="border-b-2 border-black pb-6 dark:border-gray-600">
+    <div>
+      <h1 class="text-4xl font-extrabold uppercase"><%= title %></h1>
+    </div>
+  </header>
+
+  <section class="mt-8">
+    <form
+      action="<%= action %>"
+      method="POST"
+      class="space-y-6 border-2 border-black p-8 dark:border-gray-600"
+    >
+      <div>
+        <label for="title" class="mb-2 block text-lg font-bold uppercase">
+          Title
+        </label>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          value="<%= snippet.title || '' %>"
+          required
+          class="w-full border-2 border-black bg-white p-4 text-lg focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:bg-gray-800 dark:border-gray-600 dark:text-white"
+        />
+      </div>
+
+      <div>
+        <label
+          for="description"
+          class="mb-2 block text-lg font-bold uppercase"
+        >
+          Brief Description
+        </label>
+        <textarea
+          id="description"
+          name="description"
+          rows="3"
+          required
+          class="w-full border-2 border-black bg-white p-4 text-lg focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:bg-gray-800 dark:border-gray-600 dark:text-white"
+        ><%= snippet.description || '' %></textarea>
+      </div>
+
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <div>
+          <label
+            for="category_id"
+            class="mb-2 block text-lg font-bold uppercase"
+          >
+            Category
+          </label>
+          <select
+            id="category_id"
+            name="category_id"
+            class="w-full border-2 border-black bg-white p-4 text-lg focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:bg-gray-800 dark:border-gray-600 dark:text-white"
+          >
+            <option value="">-- Uncategorized --</option>
+            <% categories.forEach(cat => { %>
+            <option value="<%= cat.id %>" <%= snippet.category_id == cat.id ? 'selected' : '' %>>
+              <%= cat.name %>
+            </option>
+            <% }) %>
+          </select>
+        </div>
+        <div>
+          <label
+            for="language_id"
+            class="mb-2 block text-lg font-bold uppercase"
+          >
+            Language
+          </label>
+          <select
+            id="language_id"
+            name="language_id"
+            class="w-full border-2 border-black bg-white p-4 text-lg focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:bg-gray-800 dark:border-gray-600 dark:text-white"
+          >
+            <option value="">-- Not Specified --</option>
+            <% languages.forEach(lang => { %>
+            <option value="<%= lang.id %>" <%= snippet.language_id == lang.id ? 'selected' : '' %>>
+              <%= lang.name %>
+            </option>
+            <% }) %>
+          </select>
+        </div>
+        <div>
+          <label for="tags" class="mb-2 block text-lg font-bold uppercase">
+            Tags (Optional, comma-separated)
+          </label>
+          <input
+            type="text"
+            name="tags"
+            id="tags"
+            value="<%= snippet.tags || '' %>"
+            class="w-full border-2 border-black bg-white p-4 text-lg focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:bg-gray-800 dark:border-gray-600 dark:text-white"
+          />
+        </div>
+        <div>
+          <label
+            for="reference_url"
+            class="mb-2 block text-lg font-bold uppercase"
+          >
+            Reference URL (Optional)
+          </label>
+          <input
+            type="url"
+            name="reference_url"
+            id="reference_url"
+            value="<%= snippet.reference_url || '' %>"
+            placeholder="https://example.com"
+            class="w-full border-2 border-black bg-white p-4 text-lg focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:bg-gray-800 dark:border-gray-600 dark:text-white"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label for="code" class="mb-2 block text-lg font-bold uppercase">
+          Source Code
+        </label>
+        <textarea
+          id="code"
+          name="code"
+          rows="15"
+          required
+          class="w-full border-2 border-black bg-white p-4 text-lg focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:bg-gray-800 dark:border-gray-600 dark:text-white"
+        ><%= snippet.code || '' %></textarea>
+      </div>
+      
+      <div class="flex items-center gap-4">
+        <input
+          type="checkbox"
+          id="is_private"
+          name="is_private"
+          value="1"
+          <%= snippet.is_private ? 'checked' : '' %>
+          class="h-6 w-6 border-2 border-black"
+        />
+        <label for="is_private" class="text-lg font-bold uppercase"
+          >Make this snippet private (only accessible via direct link)</label
+        >
+      </div>
+
+      <div class="flex items-center justify-end gap-4 pt-4 border-t-2 border-black dark:border-gray-600">
+        <a
+          href="/admin/snippets"
+          class="border-2 border-black bg-white px-8 py-4 font-bold uppercase text-black dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
+          >Cancel</a
+        >
+        <button
+          type="submit"
+          class="border-2 border-black bg-yellow-300 px-8 py-4 font-bold uppercase text-black transition-all duration-150 hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[8px_8px_0px_#000] dark:hover:shadow-[8px_8px_0px_#facc15]"
+        >
+          Save Snippet
+        </button>
+      </div>
+    </form>
+  </section>
+</main>
+
+<%- include('../partials/admin/footer') %>
+

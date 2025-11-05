@@ -1,0 +1,46 @@
+<% if (pagination && pagination.totalPages > 1) { %>
+<nav
+  class="flex items-center justify-center space-x-2 mt-16"
+  aria-label="Pagination"
+>
+  <% if (pagination.currentPage > 1) { %>
+  <a
+    href="<%= pagination.baseUrl.endsWith('&') || pagination.baseUrl.endsWith('?') ? pagination.baseUrl : pagination.baseUrl + '?' %>page=<%= pagination.currentPage - 1 %>"
+    class="border-2 border-black bg-white px-4 py-2 font-bold uppercase text-black hover:bg-yellow-300 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600 dark:hover:bg-yellow-300 dark:hover:text-black"
+  >
+    Prev
+  </a>
+  <% } else { %>
+  <span
+    class="cursor-not-allowed border-2 border-neutral-400 px-4 py-2 font-bold uppercase text-neutral-400 dark:border-gray-700 dark:text-gray-600"
+  >
+    Prev
+  </span>
+  <% } %> 
+  
+  <% for (let i = 1; i <= pagination.totalPages; i++) { %>
+  <a
+    href="<%= pagination.baseUrl.endsWith('&') || pagination.baseUrl.endsWith('?') ? pagination.baseUrl : pagination.baseUrl + '?' %>page=<%= i %>"
+    class="border-2 border-black px-4 py-2 font-bold uppercase <%= i === pagination.currentPage ? 'bg-black text-yellow-300 dark:bg-yellow-300 dark:text-black dark:border-yellow-300' : 'bg-white text-black hover:bg-yellow-300 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600 dark:hover:bg-yellow-300 dark:hover:text-black' %>"
+    aria-current="<%= i === pagination.currentPage ? 'page' : 'false' %>"
+  >
+    <%= i %>
+  </a>
+  <% } %> 
+  
+  <% if (pagination.currentPage < pagination.totalPages) { %>
+  <a
+    href="<%= pagination.baseUrl.endsWith('&') || pagination.baseUrl.endsWith('?') ? pagination.baseUrl : pagination.baseUrl + '?' %>page=<%= pagination.currentPage + 1 %>"
+    class="border-2 border-black bg-white px-4 py-2 font-bold uppercase text-black hover:bg-yellow-300 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600 dark:hover:bg-yellow-300 dark:hover:text-black"
+  >
+    Next
+  </a>
+  <% } else { %>
+  <span
+    class="cursor-not-allowed border-2 border-neutral-400 px-4 py-2 font-bold uppercase text-neutral-400 dark:border-gray-700 dark:text-gray-600"
+  >
+    Next
+  </span>
+  <% } %>
+</nav>
+<% } %>

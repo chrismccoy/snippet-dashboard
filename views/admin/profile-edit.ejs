@@ -1,0 +1,135 @@
+<%- include('../partials/admin/header') %> 
+<%- include('../partials/admin/sidebar') %>
+
+<main class="col-span-1 p-4 sm:p-6 lg:col-span-4 lg:p-8">
+  <header class="border-b-2 border-black pb-6 dark:border-gray-600">
+    <div>
+      <h1 class="text-4xl font-extrabold uppercase"><%= title %></h1>
+      <p class="text-neutral-600 dark:text-neutral-400">
+        UPDATE YOUR EMAIL ADDRESS OR PASSWORD
+      </p>
+    </div>
+  </header>
+
+  <section class="mt-8 space-y-8">
+    <% if (error) { %>
+      <p class="border-2 border-red-500 bg-red-100 p-3 text-center dark:bg-red-900 dark:text-red-200 dark:border-red-600">
+        <%= error %>
+      </p>
+    <% } %>
+    <% if (success) { %>
+      <p class="border-2 border-green-500 bg-green-100 p-3 text-center dark:bg-green-900 dark:text-green-200 dark:border-green-600">
+        <%= success %>
+      </p>
+    <% } %>
+
+    <div class="border-2 border-black p-8 dark:border-gray-600">
+      <h3
+        class="mb-4 inline-block bg-black px-4 py-2 text-3xl font-bold uppercase text-yellow-300"
+      >
+        // Update Email
+      </h3>
+      <form action="/admin/profile/update-email" method="POST" class="space-y-6">
+        <div>
+          <label for="newEmail" class="mb-2 block text-lg font-bold uppercase">
+            New Email Address
+          </label>
+          <input
+            type="email"
+            id="newEmail"
+            name="newEmail"
+            value="<%= email %>"
+            required
+            class="w-full border-2 border-black bg-white p-4 text-lg focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:bg-gray-800 dark:border-gray-600 dark:text-white"
+          />
+        </div>
+        <div>
+          <label for="currentPasswordEmail" class="mb-2 block text-lg font-bold uppercase">
+            Current Password
+          </label>
+          <input
+            type="password"
+            id="currentPasswordEmail"
+            name="currentPassword"
+            required
+            class="w-full border-2 border-black bg-white p-4 text-lg focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:bg-gray-800 dark:border-gray-600 dark:text-white"
+          />
+        </div>
+        <div class="flex justify-end">
+          <button
+            type="submit"
+            class="border-2 border-black bg-yellow-300 px-8 py-4 font-bold uppercase text-black transition-all duration-150 hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[8px_8px_0px_#000] dark:hover:shadow-[8px_8px_0px_#facc15]"
+          >
+            Update Email
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="border-2 border-black p-8 dark:border-gray-600">
+      <h3
+        class="mb-4 inline-block bg-black px-4 py-2 text-3xl font-bold uppercase text-yellow-300"
+      >
+        // Update Password
+      </h3>
+      <form action="/admin/profile/update-password" method="POST" class="space-y-6">
+        <div>
+          <label for="currentPasswordNew" class="mb-2 block text-lg font-bold uppercase">
+            Current Password
+          </label>
+          <input
+            type="password"
+            id="currentPasswordNew"
+            name="currentPassword"
+            required
+            class="w-full border-2 border-black bg-white p-4 text-lg focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:bg-gray-800 dark:border-gray-600 dark:text-white"
+          />
+        </div>
+        <div>
+          <label for="newPassword" class="mb-2 block text-lg font-bold uppercase">
+            New Password
+          </label>
+          <input
+            type="password"
+            id="newPassword"
+            name="newPassword"
+            required
+            minlength="6"
+            class="w-full border-2 border-black bg-white p-4 text-lg focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:bg-gray-800 dark:border-gray-600 dark:text-white"
+          />
+        </div>
+        <div>
+          <label for="confirmNewPassword" class="mb-2 block text-lg font-bold uppercase">
+            Confirm New Password
+          </label>
+          <input
+            type="password"
+            id="confirmNewPassword"
+            name="confirmNewPassword"
+            required
+            minlength="6"
+            class="w-full border-2 border-black bg-white p-4 text-lg focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:bg-gray-800 dark:border-gray-600 dark:text-white"
+          />
+        </div>
+        <div class="flex justify-end">
+          <button
+            type="submit"
+            class="border-2 border-black bg-yellow-300 px-8 py-4 font-bold uppercase text-black transition-all duration-150 hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[8px_8px_0px_#000] dark:hover:shadow-[8px_8px_0px_#facc15]"
+          >
+            Update Password
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="flex justify-end">
+      <a
+        href="/admin/profile"
+        class="border-2 border-black bg-white px-8 py-4 font-bold uppercase text-black dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
+        >Back to Profile</a
+      >
+    </div>
+  </section>
+</main>
+
+<%- include('../partials/admin/footer') %>

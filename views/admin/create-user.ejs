@@ -1,0 +1,105 @@
+<%- include('../partials/admin/header') %> 
+<%- include('../partials/admin/sidebar') %>
+
+<main class="col-span-1 p-4 sm:p-6 lg:col-span-4 lg:p-8">
+  <header class="border-b-2 border-black pb-6 dark:border-gray-600">
+    <div>
+      <h1 class="text-4xl font-extrabold uppercase">Create New User</h1>
+      <p class="text-neutral-600 dark:text-neutral-400">
+        MANUALLY CREATE A PRE-APPROVED USER ACCOUNT
+      </p>
+    </div>
+  </header>
+
+  <section class="mt-8">
+    <form
+      action="/admin/users/create"
+      method="POST"
+      class="space-y-6 border-2 border-black p-8 dark:border-gray-600"
+    >
+      <% if (error) { %>
+      <p class="border-2 border-red-500 bg-red-100 p-3 text-center">
+        <%= error %>
+      </p>
+      <% } %> <% if (success) { %>
+      <p class="border-2 border-green-500 bg-green-100 p-3 text-center">
+        <%= success %>
+      </p>
+      <% } %>
+
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <div>
+          <label
+            for="username"
+            class="mb-2 block text-lg font-bold uppercase"
+          >
+            Username
+          </label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            required
+            class="w-full border-2 border-black bg-white p-4 text-lg focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:bg-gray-800 dark:border-gray-600"
+          />
+        </div>
+        <div>
+          <label for="email" class="mb-2 block text-lg font-bold uppercase">
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            class="w-full border-2 border-black bg-white p-4 text-lg focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:bg-gray-800 dark:border-gray-600"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label for="password" class="mb-2 block text-lg font-bold uppercase">
+          Password
+        </label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          required
+          class="w-full border-2 border-black bg-white p-4 text-lg focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:bg-gray-800 dark:border-gray-600"
+        />
+      </div>
+
+      <div class="flex items-center gap-4">
+        <input
+          type="checkbox"
+          id="is_admin"
+          name="is_admin"
+          value="true"
+          class="h-6 w-6 border-2 border-black"
+        />
+        <label for="is_admin" class="text-lg font-bold uppercase"
+          >Make this user an Administrator?</label
+        >
+      </div>
+
+      <div
+        class="flex items-center justify-end gap-4 pt-4 border-t-2 border-black dark:border-gray-600"
+      >
+        <a
+          href="/admin/users"
+          class="border-2 border-black bg-white px-8 py-4 font-bold uppercase text-black dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
+          >Cancel</a
+        >
+        <button
+          type="submit"
+          class="border-2 border-black bg-yellow-300 px-8 py-4 font-bold uppercase text-black transition-all duration-150 hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[8px_8px_0px_#000] dark:hover:shadow-[8px_8px_0px_#facc15]"
+        >
+          Create User
+        </button>
+      </div>
+    </form>
+  </section>
+</main>
+
+<%- include('../partials/admin/footer') %>

@@ -1,0 +1,107 @@
+<%- include('../partials/admin/header') %> 
+<%- include('../partials/admin/sidebar') %>
+
+<main class="col-span-1 p-4 sm:p-6 lg:col-span-4 lg:p-8">
+  <header
+    class="flex items-center justify-between border-b-2 border-black pb-6 dark:border-gray-600"
+  >
+    <div>
+      <h1 class="text-4xl font-extrabold uppercase"><%= title %></h1>
+      <p class="text-neutral-600 dark:text-neutral-400">
+        MANAGE YOUR CODE SNIPPETS
+      </p>
+    </div>
+    <a
+      href="/admin/snippets/new"
+      class="border-2 border-black bg-yellow-300 px-4 py-2 font-bold uppercase text-black hover:bg-yellow-300"
+    >
+      New Snippet
+    </a>
+  </header>
+
+  <section class="mt-8">
+    <div class="overflow-x-auto border-2 border-black dark:border-gray-600">
+      <table class="w-full text-left">
+        <thead class="bg-black text-yellow-300">
+          <tr>
+            <th class="p-4 uppercase">Title</th>
+            <th class="p-4 uppercase">Category</th>
+            <% if (session.user.is_admin) { %>
+            <th class="p-4 uppercase">Author</th>
+            <% } %>
+            <th class="p-4 uppercase">Visibility</th>
+            <th class="p-4 uppercase">Description</th>
+            <th class="p-4 uppercase">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% snippets.forEach(snippet => { %>
+          <tr
+            class="border-b-2 border-black bg-white even:bg-neutral-50 hover:bg-yellow-300 dark:bg-gray-800 dark:even:bg-gray-700 dark:border-gray-600"
+          >
+            <td class="p-4 font-bold"><%= snippet.title %></td>
+            <td class="p-4"><%= snippet.category_name || 'N/A' %></td>
+            <% if (session.user.is_admin) { %>
+            <td class="p-4"><%= snippet.author_name || 'N/A' %></td>
+            <% } %>
+            <td class="p-4">
+              <% if (snippet.is_private) { %>
+                <span class="bg-red-200 text-red-800 px-2 py-1 text-xs font-bold">Private</span>
+              <% } else { %>
+                <span class="bg-green-200 text-green-800 px-2 py-1 text-xs font-bold">Public</span>
+              <% } %>
+            </td>
+            <td class="p-4 text-sm text-neutral-600 dark:text-neutral-400">
+              <%= snippet.description %>
+            </td>
+            <td class="p-4">
+              <div class="flex items-center space-x-4">
+                <% const snippetUrl = urlStyle === 'shortid' && snippet.short_id ? snippet.short_id : snippet.slug; %>
+                <a
+                  href="/<%= snippetUrl %>"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="font-bold uppercase underline"
+                  >View</a
+                >
+                <a
+                  href="/admin/snippets/edit/<%= snippet.id %>"
+                  class="font-bold uppercase underline"
+                  >Edit</a
+                >
+                <div class="delete-container">
+                  <button
+                    type="button"
+                    class="delete-btn font-bold uppercase text-red-600"
+                  >
+                    Delete
+                  </button>
+                  <div class="delete-confirm" style="display: none">
+                    <form
+                      action="/admin/snippets/delete/<%= snippet.id %>"
+                      method="POST"
+                      class="inline"
+                    >
+                      <button type="submit" class="font-bold text-red-600">
+                        YES
+                      </button>
+                    </form>
+                    <button
+                      type="button"
+                      class="cancel-delete-btn ml-2 font-bold"
+                    >
+                      NO
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<%- include('../partials/admin/footer') %>

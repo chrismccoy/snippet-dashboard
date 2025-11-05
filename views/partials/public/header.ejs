@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" class="<%- locals.theme || 'light' %>">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %> // Code Snippets</title>
+    <link href="/css/app.css" rel="stylesheet" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    class="bg-white text-black font-mono transition-colors duration-300 dark:bg-gray-900 dark:text-gray-200"
+  >
+    <div class="mx-auto max-w-7xl p-4 sm:p-6 lg:p-8">
+      <header
+        class="flex items-center justify-between border-b-4 border-black py-4 dark:border-gray-600"
+      >
+        <h1 class="text-2xl font-bold uppercase md:text-3xl">
+          <a href="/" class="hover:bg-yellow-300 dark:hover:text-black"
+            >Code Snippets</a
+          >
+        </h1>
+        <div class="flex items-center space-x-6">
+          <nav class="hidden space-x-6 text-lg font-bold md:flex">
+            <a
+              href="/admin/login"
+              class="px-2 hover:bg-yellow-300 dark:hover:text-black"
+              >Admin</a
+            >
+          </nav>
+          <%- include('../theme-switcher') %>
+        </div>
+      </header>
+      <main class="mt-12">
+        <section class="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-12">
+          <%- include('sidebar') %>
+          <div class="lg:col-span-2">

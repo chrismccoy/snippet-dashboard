@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.snippet-card {
+  transition: all 0.15s ease-out;
+}
+
+.snippet-card:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 8px 8px 0px #000;
+}
+
+.dark .snippet-card:hover {
+  box-shadow: 8px 8px 0px #facc15;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-left: 2px solid #000;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1f2937;
+  border-left: 2px solid #4b5563;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #facc15;
+  border: 2px solid #000;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  border-color: #4b5563;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #fde047;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+@media print {
+  .print-hidden {
+    display: none !important;
+  }
+
+  body > .mx-auto > header,
+  body > .mx-auto > main > section > aside,
+  body > .mx-auto > footer {
+    display: none !important;
+  }
+
+  body,
+  main {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  pre[class*="language-"] {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    width: 100% !important;
+    overflow: visible !important;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" class="<%- locals.theme || 'light' %>">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up // Snippet Dashboard</title>
+    <link href="/css/app.css" rel="stylesheet" />
+  </head>
+  <body class="bg-white text-black font-mono transition-colors duration-300 dark:bg-gray-900 dark:text-gray-200">
+    <div class="mx-auto max-w-7xl p-4 sm:p-6 lg:p-8">
+      <header class="flex items-center justify-between border-b-4 border-black py-4 dark:border-gray-600">
+        <h1 class="text-2xl font-bold uppercase md:text-3xl"><a href="/" class="hover:bg-yellow-300 dark:hover:text-black">SnippetDash</a></h1>
+        <%- include('partials/theme-switcher') %>
+      </header>
+      <main>
+        <section class="py-12 text-center md:py-16">
+          <h2 class="text-5xl font-extrabold uppercase tracking-tighter md:text-7xl lg:text-8xl">Create Account</h2>
+          <p class="mx-auto mt-6 max-w-2xl text-lg">Sign up to start saving your snippets. Your account will require admin approval before you can log in.</p>
+        </section>
+        <section class="mx-auto max-w-lg">
+          <form action="/signup" method="POST" class="space-y-6 border-2 border-black p-8 dark:border-gray-600">
+            <% if (error) { %>
+              <p class="border-2 border-red-500 bg-red-100 p-3 text-center"><%= error %></p>
+            <% } %>
+            <% if (success) { %>
+              <p class="border-2 border-green-500 bg-green-100 p-3 text-center"><%= success %></p>
+            <% } %>
+            <div>
+              <label for="username" class="mb-2 block text-lg font-bold uppercase">Username</label>
+              <input type="text" id="username" name="username" required class="w-full border-2 border-black bg-white p-4 text-lg focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:bg-gray-800 dark:border-gray-600" />
+            </div>
+            <div>
+                <label for="email" class="mb-2 block text-lg font-bold uppercase">Email</label>
+                <input type="email" id="email" name="email" required class="w-full border-2 border-black bg-white p-4 text-lg focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:bg-gray-800 dark:border-gray-600" />
+            </div>
+            <div>
+              <label for="password" class="mb-2 block text-lg font-bold uppercase">Password</label>
+              <input type="password" id="password" name="password" required class="w-full border-2 border-black bg-white p-4 text-lg focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:bg-gray-800 dark:border-gray-600" />
+            </div>
+            <div>
+              <button type="submit" class="w-full border-2 border-black bg-yellow-300 px-8 py-4 text-xl font-bold uppercase text-black transition-all duration-150 hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[8px_8px_0px_#000] dark:hover:shadow-[8px_8px_0px_#facc15]">Sign Up</button>
+            </div>
+            <div class="text-center">
+                <a href="/login" class="underline hover:bg-yellow-300 dark:hover:text-black">Already have an account? Log in.</a>
+            </div>
+          </form>
+        </section>
+      </main>
+      <footer class="mt-16 border-t-4 border-black py-12 text-center dark:border-gray-600">
+        <p class="mt-12 text-sm text-neutral-600 dark:text-neutral-400">&copy; <%= new Date().getFullYear() %> ALL RIGHTS RESERVED.</p>
+      </footer>
+    </div>
+    <script src="/js/app.js"></script>
+  </body>
+</html>
