@@ -1,0 +1,74 @@
+<%- include('../partials/admin/header') %> 
+<%- include('../partials/admin/page-head-end') %>
+
+<div class="space-y-6">
+  <div class="card">
+    <div class="card-head">
+      <%- include('../partials/icon', { name: 'fa-solid fa-folder-plus' }) %>
+      New category
+    </div>
+    <div class="card-body">
+      <form action="/admin/categories/add" method="POST" class="flex gap-2">
+        <input type="text" name="name" id="name" required class="input" placeholder="New category name…" />
+        <button type="submit" class="btn btn-primary">Add</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <%- include('../partials/icon', { name: 'fa-solid fa-folder' }) %>
+      Existing categories
+    </div>
+    <div class="overflow-x-auto">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Category name</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (categories.length === 0) { %>
+          <tr>
+            <td class="card-empty" colspan="2">No categories yet.</td>
+          </tr>
+          <% } %>
+          <% categories.forEach(category => { %>
+          <tr class="inline-editable-item">
+            <td>
+              <div class="item-display flex items-center">
+                <span class="font-medium text-slate-900"><%= category.name %></span>
+              </div>
+              <div class="item-edit" style="display: none">
+                <form action="/admin/categories/update/<%= category.id %>" method="POST" class="flex items-center gap-x-2">
+                  <input type="text" name="name" value="<%= category.name %>" required class="input" />
+                  <button type="submit" class="btn btn-sm btn-primary">Save</button>
+                  <button type="button" class="cancel-edit-btn btn btn-sm btn-quiet">Cancel</button>
+                </form>
+              </div>
+            </td>
+            <td>
+              <div class="item-display flex items-center gap-2">
+                <a href="/category/<%= category.slug %>" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-quiet">View</a>
+                <button type="button" class="edit-item-btn btn btn-sm btn-primary">Edit</button>
+                <div class="delete-container">
+                  <button type="button" class="delete-btn btn btn-sm btn-danger">Delete</button>
+                  <div class="delete-confirm" style="display: none">
+                    <form action="/admin/categories/delete/<%= category.id %>" method="POST" class="inline">
+                      <button type="submit" class="btn btn-sm btn-danger">Yes, delete</button>
+                    </form>
+                    <button type="button" class="cancel-delete-btn btn btn-sm btn-quiet ml-2">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/admin/footer') %>

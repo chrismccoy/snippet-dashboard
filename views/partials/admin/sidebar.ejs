@@ -1,0 +1,54 @@
+<aside class="fixed inset-y-0 left-0 z-20 hidden w-[244px] flex-col bg-slate-900 text-slate-300 lg:flex">
+  <a href="/admin/snippets" class="flex h-16 items-center gap-2.5 border-b border-white/5 px-5">
+    <span class="grid h-7 w-7 place-items-center rounded-lg bg-gradient-to-br from-brand-500 to-brand-700 text-[13px] text-white">
+      <%- include('../icon', { name: 'fa-solid fa-terminal' }) %>
+    </span>
+    <span class="text-base font-semibold text-white">SnippetDash</span>
+  </a>
+
+  <nav class="flex-1 overflow-y-auto px-3 py-3.5 text-sm">
+    <p class="nav-group">Main</p>
+
+    <a href="/admin/snippets" class="flex items-center gap-3 rounded-lg px-3 py-2 <%= activeNav === 'snippets' ? 'bg-brand-600 font-medium text-white' : 'text-slate-300 hover:bg-white/5 hover:text-white' %>">
+      <span class="w-4 text-center text-[13px] <%= activeNav === 'snippets' ? 'text-white' : 'text-slate-400' %>"><%- include('../icon', { name: 'fa-solid fa-code' }) %></span>
+      <span>Snippets</span>
+    </a>
+
+    <% if (session.user.is_admin) { %>
+      <a href="/admin/categories" class="flex items-center gap-3 rounded-lg px-3 py-2 <%= activeNav === 'categories' ? 'bg-brand-600 font-medium text-white' : 'text-slate-300 hover:bg-white/5 hover:text-white' %>">
+        <span class="w-4 text-center text-[13px] <%= activeNav === 'categories' ? 'text-white' : 'text-slate-400' %>"><%- include('../icon', { name: 'fa-solid fa-folder' }) %></span>
+        <span>Categories</span>
+      </a>
+      <a href="/admin/languages" class="flex items-center gap-3 rounded-lg px-3 py-2 <%= activeNav === 'languages' ? 'bg-brand-600 font-medium text-white' : 'text-slate-300 hover:bg-white/5 hover:text-white' %>">
+        <span class="w-4 text-center text-[13px] <%= activeNav === 'languages' ? 'text-white' : 'text-slate-400' %>"><%- include('../icon', { name: 'fa-solid fa-language' }) %></span>
+        <span>Languages</span>
+      </a>
+    <% } %>
+
+    <p class="nav-group">Account</p>
+
+    <a href="/admin/profile" class="flex items-center gap-3 rounded-lg px-3 py-2 <%= activeNav === 'profile' ? 'bg-brand-600 font-medium text-white' : 'text-slate-300 hover:bg-white/5 hover:text-white' %>">
+      <span class="w-4 text-center text-[13px] <%= activeNav === 'profile' ? 'text-white' : 'text-slate-400' %>"><%- include('../icon', { name: 'fa-solid fa-user' }) %></span>
+      <span>My Profile</span>
+    </a>
+
+    <% if (session.user.is_admin) { %>
+      <a href="/admin/users/create" class="flex items-center gap-3 rounded-lg px-3 py-2 <%= activeNav === 'create-user' ? 'bg-brand-600 font-medium text-white' : 'text-slate-300 hover:bg-white/5 hover:text-white' %>">
+        <span class="w-4 text-center text-[13px] <%= activeNav === 'create-user' ? 'text-white' : 'text-slate-400' %>"><%- include('../icon', { name: 'fa-solid fa-user-plus' }) %></span>
+        <span>Create User</span>
+      </a>
+      <a href="/admin/users" class="flex items-center gap-3 rounded-lg px-3 py-2 <%= activeNav === 'users' ? 'bg-brand-600 font-medium text-white' : 'text-slate-300 hover:bg-white/5 hover:text-white' %>">
+        <span class="w-4 text-center text-[13px] <%= activeNav === 'users' ? 'text-white' : 'text-slate-400' %>"><%- include('../icon', { name: 'fa-solid fa-users' }) %></span>
+        <span>Manage Users</span>
+      </a>
+    <% } %>
+  </nav>
+
+  <div class="border-t border-white/5 p-3">
+    <a href="/admin/logout" class="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm text-slate-300 hover:bg-white/5 hover:text-white">
+      <span class="w-4 text-center text-[13px] text-slate-400"><%- include('../icon', { name: 'fa-solid fa-right-from-bracket' }) %></span>
+      <span>Log out</span>
+    </a>
+    <p class="px-3 pb-1 pt-2 text-[11px] text-slate-500">v2.0.0</p>
+  </div>
+</aside>

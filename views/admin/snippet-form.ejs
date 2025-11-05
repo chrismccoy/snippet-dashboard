@@ -1,0 +1,74 @@
+<%- include('../partials/admin/header') %> 
+<%- include('../partials/admin/page-head-end') %>
+
+<div class="card">
+  <div class="card-body">
+    <form action="<%= action %>" method="POST">
+      <div class="mb-4">
+        <label for="title" class="field-label">Title</label>
+        <input type="text" name="title" id="title" value="<%= snippet.title || '' %>" required class="input" />
+      </div>
+
+      <div class="mb-4">
+        <label for="description" class="field-label">Brief description</label>
+        <textarea id="description" name="description" rows="3" required class="input"><%= snippet.description || '' %></textarea>
+      </div>
+
+      <div class="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div>
+          <label for="category_id" class="field-label">Category</label>
+          <select id="category_id" name="category_id" class="select">
+            <option value="">Uncategorized</option>
+            <% categories.forEach(cat => { %>
+            <option value="<%= cat.id %>" <%= snippet.category_id == cat.id ? 'selected' : '' %>><%= cat.name %></option>
+            <% }) %>
+          </select>
+        </div>
+        <div>
+          <label for="language_id" class="field-label">Language</label>
+          <select id="language_id" name="language_id" class="select">
+            <option value="">Not specified</option>
+            <% languages.forEach(lang => { %>
+            <option value="<%= lang.id %>" <%= snippet.language_id == lang.id ? 'selected' : '' %>><%= lang.name %></option>
+            <% }) %>
+          </select>
+        </div>
+        <div>
+          <label for="tags" class="field-label">Tags</label>
+          <input type="text" name="tags" id="tags" value="<%= snippet.tags || '' %>" class="input" />
+          <p class="help">Optional, comma-separated.</p>
+        </div>
+        <div>
+          <label for="reference_url" class="field-label">Reference URL</label>
+          <input type="url" name="reference_url" id="reference_url" value="<%= snippet.reference_url || '' %>" placeholder="https://example.com" class="input" />
+          <p class="help">Optional.</p>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label for="code" class="field-label">Source code</label>
+        <textarea id="code" name="code" rows="15" required class="textarea"><%= snippet.code || '' %></textarea>
+      </div>
+
+      <div class="toggle-row">
+        <label class="relative mt-0.5 inline-flex h-5 w-9 flex-shrink-0 cursor-pointer items-center">
+          <input type="checkbox" id="is_private" name="is_private" value="1" <%= snippet.is_private ? 'checked' : '' %> class="peer sr-only" aria-label="Private snippet" />
+          <span class="absolute inset-0 rounded-full bg-slate-300 transition-colors peer-checked:bg-brand-600 peer-focus-visible:ring-2 peer-focus-visible:ring-brand-500 peer-focus-visible:ring-offset-2"></span>
+          <span class="relative h-4 w-4 translate-x-0.5 rounded-full bg-white shadow transition-transform peer-checked:translate-x-4"></span>
+        </label>
+        <div>
+          <div class="text-sm font-medium text-slate-900">Private snippet</div>
+          <p class="mt-0.5 text-xs text-slate-500">Hidden from listings. Only reachable by direct link.</p>
+        </div>
+      </div>
+
+      <div class="mt-6 flex items-center justify-end gap-2 border-t border-slate-200 pt-4">
+        <a href="/admin/snippets" class="btn btn-quiet">Cancel</a>
+        <button type="submit" class="btn btn-primary">Save snippet</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<%- include('../partials/admin/footer') %>
+

@@ -1,0 +1,16 @@
+<%- include('../partials/public/header') %>
+
+<div class="pub-head">
+  <div>
+    <h1 class="text-xl font-semibold tracking-tight text-slate-900"><%- mainTitle %></h1>
+    <p class="mt-1 text-[13.5px] text-slate-500"><%- subtitle %></p>
+  </div>
+</div>
+
+<%- include('../partials/public/snippet-list', {
+      snippets: snippets,
+      emptyText: 'No snippets here yet.'
+    }) %>
+
+<%- include('../partials/public/pagination', { pagination }) %>
+<%- include('../partials/public/footer') %>

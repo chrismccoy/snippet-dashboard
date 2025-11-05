@@ -1,0 +1,63 @@
+<%- include('../partials/admin/header') %> 
+<%- include('../partials/admin/page-head-end') %>
+
+<div class="card">
+  <div class="overflow-x-auto">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Category</th>
+          <% if (session.user.is_admin) { %>
+          <th>Author</th>
+          <% } %>
+          <th>Visibility</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (snippets.length === 0) { %>
+        <tr>
+          <td class="card-empty" colspan="<%= session.user.is_admin ? 6 : 5 %>">No snippets yet.</td>
+        </tr>
+        <% } %>
+        <% snippets.forEach(snippet => { %>
+        <tr>
+          <td class="font-medium text-slate-900"><%= snippet.title %></td>
+          <td><%= snippet.category_name || '\u2014' %></td>
+          <% if (session.user.is_admin) { %>
+          <td><%= snippet.author_name || '\u2014' %></td>
+          <% } %>
+          <td>
+            <% if (snippet.is_private) { %>
+              <span class="pill pill-red">Private</span>
+            <% } else { %>
+              <span class="chip">Public</span>
+            <% } %>
+          </td>
+          <td class="max-w-md truncate text-slate-500"><%= snippet.description %></td>
+          <td>
+            <div class="flex items-center gap-2">
+              <% const snippetUrl = urlStyle === 'shortid' && snippet.short_id ? snippet.short_id : snippet.slug; %>
+              <a href="/<%= snippetUrl %>" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-quiet">View</a>
+              <a href="/admin/snippets/edit/<%= snippet.id %>" class="btn btn-sm btn-primary">Edit</a>
+              <div class="delete-container">
+                <button type="button" class="delete-btn btn btn-sm btn-danger">Delete</button>
+                <div class="delete-confirm" style="display: none">
+                  <form action="/admin/snippets/delete/<%= snippet.id %>" method="POST" class="inline">
+                    <button type="submit" class="btn btn-sm btn-danger">Yes, delete</button>
+                  </form>
+                  <button type="button" class="cancel-delete-btn btn btn-sm btn-quiet ml-2">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%- include('../partials/admin/footer') %>

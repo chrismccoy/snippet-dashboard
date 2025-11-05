@@ -1,0 +1,284 @@
+@tailwind base;
+@tailwind components;
+
+.btn {
+  @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-transparent px-3.5 py-1.5 text-sm font-medium;
+}
+.btn-primary {
+  @apply bg-brand-600 text-white hover:bg-brand-700;
+}
+.btn-quiet {
+  @apply border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-900;
+}
+.btn-danger {
+  @apply bg-red-600 text-white hover:bg-red-700;
+}
+.btn-dark {
+  @apply bg-slate-900 text-white hover:bg-slate-700;
+}
+.btn-sm {
+  @apply gap-1.5 rounded-md px-2.5 py-1 text-xs;
+}
+.btn:disabled {
+  @apply cursor-not-allowed opacity-50;
+}
+.btn-disabled {
+  @apply cursor-not-allowed border-slate-200 bg-slate-50 text-slate-300 hover:bg-slate-50 hover:text-slate-300;
+}
+
+.card {
+  @apply rounded-xl border border-slate-200 bg-white shadow-sm;
+}
+.card-head {
+  @apply flex items-center gap-2.5 border-b border-slate-200 px-4 py-3 text-[13px] font-semibold text-slate-900;
+}
+.card-body {
+  @apply p-4;
+}
+.card-empty {
+  @apply p-6 text-center text-sm text-slate-400;
+}
+
+.pill {
+  @apply inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-2.5 py-0.5 text-[11.5px] font-semibold tabular-nums text-slate-600;
+}
+.pill-green {
+  @apply bg-green-100 text-green-700;
+}
+.pill-amber {
+  @apply bg-amber-100 text-amber-700;
+}
+.pill-red {
+  @apply bg-red-100 text-red-700;
+}
+.chip {
+  @apply inline-flex items-center gap-1.5 rounded-md bg-slate-100 px-2 py-0.5 text-[11.5px] text-slate-500;
+}
+
+.field-label {
+  @apply mb-1.5 block text-[13px] font-medium text-slate-700;
+}
+.help {
+  @apply mt-1.5 text-xs text-slate-500;
+}
+.kpi-label {
+  @apply text-[11px] font-semibold uppercase tracking-wider text-slate-500;
+}
+.nav-group {
+  @apply px-3 pb-1.5 pt-3.5 text-[10.5px] font-semibold uppercase tracking-[0.09em] text-slate-500;
+}
+
+.input,
+.textarea,
+.select {
+  @apply w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm text-slate-800 placeholder:text-slate-400 focus:border-brand-500 focus:bg-white focus:outline-none;
+}
+.textarea {
+  @apply min-h-[220px] font-mono text-[13px] leading-relaxed;
+}
+.select {
+  @apply pr-8;
+}
+
+.empty {
+  @apply rounded-xl border border-dashed border-slate-300 bg-white px-6 py-16 text-center;
+}
+
+.data-table {
+  @apply w-full border-collapse text-left text-[13.5px];
+}
+.data-table thead th {
+  @apply whitespace-nowrap border-b border-slate-200 bg-slate-50 px-4 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-slate-500;
+}
+.data-table tbody td {
+  @apply border-b border-slate-100 px-4 py-3 align-middle text-slate-700;
+}
+.data-table tbody tr:last-child td {
+  @apply border-b-0;
+}
+.data-table tbody tr:hover td {
+  @apply bg-slate-50;
+}
+
+.toggle-row {
+  @apply flex items-start gap-3 rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-3;
+}
+
+.notice {
+  @apply mb-[18px] flex items-start gap-2.5 rounded-lg border px-3.5 py-[11px] text-[13px];
+}
+.notice i {
+  @apply mt-0.5;
+}
+.notice-warn {
+  @apply border-amber-200 bg-amber-50 text-amber-700;
+}
+.notice-error {
+  @apply border-red-200 bg-red-50 text-red-700;
+}
+.notice-ok {
+  @apply border-green-200 bg-green-50 text-green-700;
+}
+.notice-info {
+  @apply border-indigo-200 bg-indigo-50 text-indigo-700;
+}
+
+.pub-centre {
+  @apply flex min-h-[60vh] items-center justify-center;
+}
+.panel {
+  @apply mx-auto w-full max-w-[380px] rounded-2xl border border-slate-200 bg-white p-[30px];
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.06),
+    0 8px 24px rgba(15, 23, 42, 0.06);
+}
+.panel-head {
+  @apply mb-[22px] text-center;
+}
+
+.pub-header-sticky {
+  @apply sticky top-0 z-10 border-b border-slate-200 bg-white/80 backdrop-blur-sm;
+}
+.pub-header {
+  @apply border-b border-slate-200 bg-white/80 backdrop-blur-sm;
+}
+.pub-main {
+  @apply mx-auto max-w-[1120px] px-5 py-7 pb-14;
+}
+.pub-foot {
+  @apply mx-auto flex max-w-[1120px] items-center justify-center gap-2 px-5 pb-10 text-[11.5px] text-slate-400;
+}
+.owner-only {
+  @apply inline-flex items-center gap-1.5 rounded-full border border-dashed border-slate-300 bg-white px-2.5 py-0.5 text-[11.5px] text-slate-500;
+}
+.pub-head {
+  @apply mb-[18px] flex flex-wrap items-end justify-between gap-4;
+}
+
+.meta-row {
+  @apply mt-4 flex flex-wrap gap-1.5 border-t border-slate-100 pt-4;
+}
+.meta-row .chip {
+  @apply bg-slate-100 text-slate-600;
+}
+.meta-row .chip i {
+  @apply text-slate-500;
+}
+.meta-row .chip-brand {
+  @apply bg-indigo-50 text-indigo-700;
+}
+.meta-row .chip-brand i {
+  @apply text-indigo-400;
+}
+.chip .fa-hashtag {
+  @apply text-slate-400;
+}
+.chip-brand {
+  @apply bg-indigo-50 text-indigo-700;
+}
+.chip-brand i {
+  @apply text-indigo-400;
+}
+.act-row {
+  @apply mt-4 flex flex-wrap gap-2;
+}
+
+.pager {
+  @apply mt-8 flex flex-wrap items-center justify-center gap-2 text-sm text-slate-500;
+}
+.pager-status {
+  @apply px-2 tabular-nums;
+}
+
+@tailwind utilities;
+
+@layer base {
+  [hidden] {
+    display: none !important;
+  }
+}
+
+@media print {
+  .print-hidden {
+    display: none !important;
+  }
+
+  body,
+  main {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  pre[class*="language-"] {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    width: 100% !important;
+    overflow: visible !important;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+}
+
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #334155;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  tab-size: 2;
+  hyphens: none;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+}
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #94a3b8;
+  font-style: italic;
+}
+.token.string,
+.token.attr-value,
+.token.char,
+.token.inserted {
+  color: #0f766e;
+}
+.token.keyword,
+.token.builtin,
+.token.class-name,
+.token.selector,
+.token.important {
+  color: #4338ca;
+  font-weight: 600;
+}
+.token.function,
+.token.atrule {
+  color: #7c3aed;
+}
+.token.number,
+.token.boolean,
+.token.constant,
+.token.symbol,
+.token.regex {
+  color: #b45309;
+}
+.token.operator,
+.token.punctuation,
+.token.entity,
+.token.url {
+  color: #64748b;
+}
+.token.tag,
+.token.attr-name,
+.token.property,
+.token.deleted {
+  color: #be123c;
+}
+.token.namespace {
+  opacity: 0.7;
+}

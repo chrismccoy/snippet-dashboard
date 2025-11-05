@@ -1,0 +1,10 @@
+node_modules/
+
+# Runtime secrets: session secret, initial admin credentials.
+.env
+
+# SQLite databases and their WAL/SHM sidecars, plus manual backups.
+data/
+
+# Built stylesheet is committed deliberately so a checkout serves without a
+# build step; see package.json build:css.

@@ -1,0 +1,56 @@
+<%- include('../partials/admin/header') %> 
+<%- include('../partials/admin/page-head-end') %>
+
+<div class="card">
+  <div class="overflow-x-auto">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Status</th>
+          <th>Role</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (users.length === 0) { %>
+        <tr>
+          <td class="card-empty" colspan="5">No users yet.</td>
+        </tr>
+        <% } %>
+        <% users.forEach(user => { %>
+        <tr>
+          <td class="font-medium text-slate-900"><%= user.username %></td>
+          <td><%= user.email %></td>
+          <td>
+            <% if (user.is_approved) { %>
+              <span class="pill pill-green">Approved</span>
+            <% } else { %>
+              <span class="pill pill-amber">Pending</span>
+            <% } %>
+          </td>
+          <td><%= user.is_admin ? 'Admin' : 'User' %></td>
+          <td>
+            <% if (!user.is_admin) { %>
+              <% if (user.is_approved) { %>
+                <form action="/admin/users/approve/<%= user.id %>" method="POST" class="inline">
+                  <input type="hidden" name="is_approved" value="0">
+                  <button type="submit" class="btn btn-sm btn-danger">Revoke</button>
+                </form>
+              <% } else { %>
+                <form action="/admin/users/approve/<%= user.id %>" method="POST" class="inline">
+                  <input type="hidden" name="is_approved" value="1">
+                  <button type="submit" class="btn btn-sm btn-primary">Approve</button>
+                </form>
+              <% } %>
+            <% } %>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%- include('../partials/admin/footer') %>

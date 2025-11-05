@@ -1,0 +1,12 @@
+<% const snippetUrl = urlStyle === 'shortid' && snippet.short_id ? snippet.short_id : snippet.slug; %>
+
+<a href="/<%= snippetUrl %>" class="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-4 gap-y-1.5 px-4 py-3 hover:bg-slate-50">
+  <span class="text-[14.5px] font-semibold tracking-tight text-slate-900"><%= snippet.title %></span>
+
+  <span class="row-span-2 flex items-center gap-1.5">
+    <% if (snippet.is_private) { %><span class="pill pill-red">Private</span><% } %>
+    <% if (snippet.category_name) { %><span class="chip"><%- include('../icon', { name: 'fa-solid fa-folder' }) %><%= snippet.category_name %></span><% } %>
+  </span>
+
+  <span class="col-start-1 truncate text-[13px] text-slate-500"><%= snippet.description %></span>
+</a>

@@ -1,0 +1,31 @@
+<% const snippetUrl = urlStyle === 'shortid' && snippet.short_id ? snippet.short_id : snippet.slug; %>
+
+<article class="card p-5">
+  <div class="flex flex-wrap items-start gap-3">
+    <h3 class="text-[16.5px] font-semibold tracking-tight">
+      <a href="/<%= snippetUrl %>" class="text-slate-900 hover:text-brand-600"><%= snippet.title %></a>
+    </h3>
+    <% if (snippet.language_slug) { %>
+      <a href="/language/<%= snippet.language_slug %>" class="chip chip-brand ml-auto shrink-0">
+        <%- include('../icon', { name: 'fa-solid fa-language' }) %><%= snippet.language_name %>
+      </a>
+    <% } %>
+  </div>
+  <p class="mt-1.5 max-w-[68ch] text-[13.5px] text-slate-500"><%= snippet.description %></p>
+
+  <div class="meta-row items-center">
+    <% if (snippet.category_slug) { %>
+      <a href="/category/<%= snippet.category_slug %>" class="chip"><%- include('../icon', { name: 'fa-solid fa-folder' }) %><%= snippet.category_name %></a>
+    <% } %>
+    <% if (snippet.tags) { %>
+      <% snippet.tags.split(',').forEach(tag => { %>
+        <% if (tag.trim()) { %>
+          <a href="/tag/<%= encodeURIComponent(tag.trim()) %>" class="chip"><%- include('../icon', { name: 'fa-solid fa-hashtag' }) %><%= tag.trim() %></a>
+        <% } %>
+      <% }) %>
+    <% } %>
+    <% if (snippet.author_name) { %>
+      <a href="/author/<%= snippet.author_name %>" class="ml-auto inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-brand-600"><%- include('../icon', { name: 'fa-solid fa-user' }) %><%= snippet.author_name %></a>
+    <% } %>
+  </div>
+</article>

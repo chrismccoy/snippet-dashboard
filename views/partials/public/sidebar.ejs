@@ -1,0 +1,97 @@
+<aside class="grid h-fit gap-4 lg:sticky lg:top-20 print-hidden">
+  <div class="card">
+    <div class="card-body">
+      <form action="/search" method="GET" id="search-form" class="flex gap-2">
+        <label for="sidebar-q" class="sr-only">Search snippets</label>
+        <input type="text" name="q" id="sidebar-q" required class="input" placeholder="Search snippets&hellip;" />
+        <button type="submit" class="btn btn-primary shrink-0">Search</button>
+      </form>
+    </div>
+  </div>
+
+  <% if (sidebar.recentSnippets && sidebar.recentSnippets.length > 0) { %>
+  <div class="card">
+    <div class="card-head">
+      <%- include('../icon', { name: 'fa-solid fa-clock-rotate-left' }) %>
+      Recently added
+    </div>
+    <div class="card-body">
+      <ul class="grid gap-2.5">
+        <% sidebar.recentSnippets.forEach(snippet => { %>
+        <% const snippetUrl = urlStyle === 'shortid' && snippet.short_id ? snippet.short_id : snippet.slug; %>
+        <li>
+          <a href="/<%= snippetUrl %>" class="flex items-start gap-2 text-[13px] font-medium text-slate-900 hover:text-brand-600">
+            <%- include('../icon', { name: 'fa-solid fa-calendar-days', extra: 'mt-0.5 w-3.5 shrink-0 text-center text-[11px] text-slate-400' }) %>
+            <span><%= snippet.title %></span>
+          </a>
+        </li>
+        <% }) %>
+      </ul>
+    </div>
+  </div>
+  <% } %>
+
+  <% if (sidebar.allCategories && sidebar.allCategories.length > 0) { %>
+  <div class="card">
+    <div class="card-head">
+      <%- include('../icon', { name: 'fa-solid fa-folder' }) %>
+      Categories
+    </div>
+    <div class="card-body">
+      <ul class="grid gap-2.5">
+        <% sidebar.allCategories.forEach(category => { %>
+        <li>
+          <a href="/category/<%= category.slug %>" class="flex items-center justify-between gap-3 text-[13px] text-slate-700 hover:text-brand-600">
+            <span class="flex items-center gap-2">
+              <%- include('../icon', { name: 'fa-solid fa-folder', extra: 'w-3.5 text-center text-[11px] text-slate-400' }) %>
+              <%= category.name %>
+            </span>
+            <span class="pill"><%= category.count %></span>
+          </a>
+        </li>
+        <% }) %>
+      </ul>
+    </div>
+  </div>
+  <% } %>
+
+  <% if (sidebar.allTags && sidebar.allTags.length > 0) { %>
+  <div class="card">
+    <div class="card-head">
+      <%- include('../icon', { name: 'fa-solid fa-tag' }) %>
+      Tags
+    </div>
+    <div class="card-body">
+      <div class="flex flex-wrap gap-1.5">
+        <% sidebar.allTags.forEach(tag => { %>
+        <a href="/tag/<%= encodeURIComponent(tag.name) %>" class="chip"><%- include('../icon', { name: 'fa-solid fa-hashtag' }) %><%= tag.name %> <span class="text-slate-400"><%= tag.count %></span></a>
+        <% }) %>
+      </div>
+    </div>
+  </div>
+  <% } %>
+
+  <% if (sidebar.allLanguages && sidebar.allLanguages.length > 0) { %>
+  <div class="card">
+    <div class="card-head">
+      <%- include('../icon', { name: 'fa-solid fa-language' }) %>
+      Languages
+    </div>
+    <div class="card-body">
+      <ul class="grid gap-2.5">
+        <% sidebar.allLanguages.forEach(lang => { %>
+        <li>
+          <a href="/language/<%= lang.slug %>" class="flex items-center justify-between gap-3 text-[13px] text-slate-700 hover:text-brand-600">
+            <span class="flex items-center gap-2">
+              <%- include('../icon', { name: 'fa-solid fa-language', extra: 'w-3.5 text-center text-[11px] text-slate-400' }) %>
+              <%= lang.name %>
+            </span>
+            <span class="pill"><%= lang.count %></span>
+          </a>
+        </li>
+        <% }) %>
+      </ul>
+    </div>
+  </div>
+  <% } %>
+</aside>

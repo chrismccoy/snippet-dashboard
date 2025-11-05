@@ -1,0 +1,14 @@
+<%
+  const listStyleResolved = locals.listStyle || 'cards';
+%>
+<% if (!snippets || snippets.length === 0) { %>
+  <%- include('empty-state', { emptyText: locals.emptyText || 'No snippets here yet.' }) %>
+<% } else if (listStyleResolved === 'rows') { %>
+  <div class="card divide-y divide-slate-100">
+    <% snippets.forEach(snippet => { %><%- include('snippet-row', { snippet: snippet }) %><% }) %>
+  </div>
+<% } else { %>
+  <div class="grid gap-4">
+    <% snippets.forEach(snippet => { %><%- include('snippet-card', { snippet: snippet }) %><% }) %>
+  </div>
+<% } %>

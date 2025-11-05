@@ -1,0 +1,102 @@
+<%- include('../partials/public/header') %>
+
+<article class="card">
+  <div class="card-body">
+    <div class="flex flex-wrap items-start gap-3">
+      <h1 class="text-2xl font-semibold tracking-tight text-slate-900"><%= snippet.title %></h1>
+      <% if (snippet.is_private) { %>
+        <span class="pill pill-red mt-1">Private</span>
+      <% } %>
+      <% if (snippet.language_slug) { %>
+        <a href="/language/<%= snippet.language_slug %>" class="chip chip-brand ml-auto mt-1">
+          <%- include('../partials/icon', { name: 'fa-solid fa-language' }) %><%= snippet.language_name %>
+        </a>
+      <% } %>
+    </div>
+
+    <% if (snippet.description) { %>
+      <p class="mt-2 max-w-[68ch] text-[13.5px] text-slate-500"><%= snippet.description %></p>
+    <% } %>
+
+<%
+      const reference = safeHref(snippet.reference_url);
+    %>
+    <% if (reference) { %>
+      <p class="mt-3">
+        <a href="<%= reference %>" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-1.5 text-[13px] text-brand-600 hover:underline">
+          <%- include('../partials/icon', { name: 'fa-solid fa-arrow-up-right-from-square' }) %>
+          Reference
+        </a>
+      </p>
+    <% } else if (snippet.reference_url) { %>
+      <p class="mt-3 inline-flex items-center gap-1.5 text-[13px] text-slate-400">
+        <%- include('../partials/icon', { name: 'fa-solid fa-link-slash' }) %>
+        Reference: <span class="break-all"><%= snippet.reference_url %></span>
+      </p>
+    <% } %>
+
+    <div class="mt-4 overflow-x-auto rounded-lg border border-slate-200 bg-slate-50 p-4">
+      <pre class="!m-0 !bg-transparent !p-0"><code id="code-content" class="language-<%= snippet.language_slug || 'plaintext' %>"><%= snippet.code %></code></pre>
+    </div>
+
+    <div class="act-row print-hidden">
+      <button id="copy-code-btn" type="button" class="btn btn-primary btn-sm">
+        <%- include('../partials/icon', { name: 'fa-solid fa-clipboard' }) %> Copy code
+      </button>
+      <a href="/download/<%= urlStyle === 'shortid' && snippet.short_id ? snippet.short_id : snippet.slug %>" download class="btn btn-quiet btn-sm">
+        <%- include('../partials/icon', { name: 'fa-solid fa-download' }) %> Download
+      </a>
+      <button id="print-btn" type="button" class="btn btn-quiet btn-sm">
+        <%- include('../partials/icon', { name: 'fa-solid fa-print' }) %> Print
+      </button>
+      <% if (snippet.short_id) { %>
+        <button id="share-shortlink-btn" type="button" data-shortid="<%= snippet.short_id %>" class="btn btn-quiet btn-sm">
+          <%- include('../partials/icon', { name: 'fa-solid fa-link' }) %> Share
+        </button>
+      <% } %>
+    </div>
+
+    <div class="meta-row items-center print-hidden">
+      <% if (snippet.category_slug) { %>
+        <a href="/category/<%= snippet.category_slug %>" class="chip"><%- include('../partials/icon', { name: 'fa-solid fa-folder' }) %><%= snippet.category_name %></a>
+      <% } %>
+      <% if (snippet.tags) { %>
+        <% snippet.tags.split(',').forEach(tag => { %>
+          <% if (tag.trim()) { %>
+            <a href="/tag/<%= encodeURIComponent(tag.trim()) %>" class="chip"><%- include('../partials/icon', { name: 'fa-solid fa-hashtag' }) %><%= tag.trim() %></a>
+          <% } %>
+        <% }) %>
+      <% } %>
+      <% if (snippet.author_name) { %>
+        <a href="/author/<%= snippet.author_name %>" class="ml-auto inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-brand-600"><%- include('../partials/icon', { name: 'fa-solid fa-user' }) %><%= snippet.author_name %></a>
+      <% } %>
+    </div>
+  </div>
+</article>
+
+<% if (locals.related && related.length > 0) { %>
+  <section class="mt-6">
+    <h2 class="mb-3 flex items-center gap-2 px-4 text-[13px] font-semibold text-slate-900">
+      <%- include('../partials/icon', { name: 'fa-solid fa-folder', extra: 'text-slate-400' }) %>
+      More in <%= snippet.category_name %>
+    </h2>
+    <div class="card divide-y divide-slate-100">
+      <% related.forEach(snippet => { %><%- include('../partials/public/snippet-row', { snippet: snippet }) %><% }) %>
+    </div>
+  </section>
+<% } %>
+
+<% if (locals.random && random.length > 0) { %>
+  <section class="mt-6">
+    <h2 class="mb-3 flex items-center gap-2 px-4 text-[13px] font-semibold text-slate-900">
+      <%- include('../partials/icon', { name: 'fa-solid fa-shuffle', extra: 'text-slate-400' }) %>
+      Random picks
+    </h2>
+    <div class="card divide-y divide-slate-100">
+      <% random.forEach(snippet => { %><%- include('../partials/public/snippet-row', { snippet: snippet }) %><% }) %>
+    </div>
+  </section>
+<% } %>
+
+<%- include('../partials/public/footer') %>

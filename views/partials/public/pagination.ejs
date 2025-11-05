@@ -1,0 +1,30 @@
+<% if (pagination && pagination.totalPages > 1) { %>
+<%
+  const url = (n) => pageUrl(pagination.baseUrl, n);
+  const hasPrev = pagination.currentPage > 1;
+  const hasNext = pagination.currentPage < pagination.totalPages;
+%>
+<nav class="pager print-hidden" aria-label="Pagination">
+  <% if (hasPrev) { %>
+    <a href="<%= url(pagination.currentPage - 1) %>" class="btn btn-quiet">
+      <%- include('../icon', { name: 'fa-solid fa-chevron-left' }) %> Previous
+    </a>
+  <% } else { %>
+    <span class="btn btn-quiet btn-disabled">
+      <%- include('../icon', { name: 'fa-solid fa-chevron-left' }) %> Previous
+    </span>
+  <% } %>
+
+  <span class="pager-status">Page <%= pagination.currentPage %> of <%= pagination.totalPages %></span>
+
+  <% if (hasNext) { %>
+    <a href="<%= url(pagination.currentPage + 1) %>" class="btn btn-quiet">
+      Next <%- include('../icon', { name: 'fa-solid fa-chevron-right' }) %>
+    </a>
+  <% } else { %>
+    <span class="btn btn-quiet btn-disabled">
+      Next <%- include('../icon', { name: 'fa-solid fa-chevron-right' }) %>
+    </span>
+  <% } %>
+</nav>
+<% } %>

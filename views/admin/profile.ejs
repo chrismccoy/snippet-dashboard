@@ -1,0 +1,72 @@
+<%- include('../partials/admin/header') %> 
+<%- include('../partials/admin/page-head-end') %>
+
+<div class="space-y-6">
+  <% if (error) { %>
+    <div class="notice notice-error">
+      <%- include('../partials/icon', { name: 'fa-solid fa-circle-exclamation' }) %>
+      <span><%= error %></span>
+    </div>
+  <% } %>
+  <% if (success) { %>
+    <div class="notice notice-ok">
+      <%- include('../partials/icon', { name: 'fa-solid fa-circle-check' }) %>
+      <span><%= success %></span>
+    </div>
+  <% } %>
+
+  <div class="card">
+    <div class="card-head">
+      <%- include('../partials/icon', { name: 'fa-solid fa-user' }) %>
+      Account info
+    </div>
+    <div class="card-body">
+      <dl class="grid grid-cols-1 gap-3 text-sm sm:grid-cols-3">
+        <div>
+          <dt class="kpi-label">Username</dt>
+          <dd class="mt-1 text-slate-900"><%= session.user.username %></dd>
+        </div>
+        <div>
+          <dt class="kpi-label">Role</dt>
+          <dd class="mt-1 text-slate-900"><%= session.user.is_admin ? 'Administrator' : 'User' %></dd>
+        </div>
+        <div>
+          <dt class="kpi-label">Email</dt>
+          <dd class="mt-1 text-slate-900"><%= userEmail %></dd>
+        </div>
+      </dl>
+      <div class="mt-5 border-t border-slate-200 pt-4">
+        <a href="/admin/profile/edit" class="btn btn-quiet">
+          <%- include('../partials/icon', { name: 'fa-solid fa-pen' }) %> Edit profile
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <%- include('../partials/icon', { name: 'fa-solid fa-key' }) %>
+      Your API key
+    </div>
+    <div class="card-body">
+      <p class="mb-3 text-[13px] text-slate-500">
+        Use this key to post snippets programmatically. Treat it like a password and do not share it.
+        If your key is compromised, generate a new one below.
+      </p>
+      <div class="flex gap-2">
+        <input type="text" id="api-key-input" value="<%= apiKey %>" readonly class="input" />
+        <button id="copy-api-key-btn" class="btn btn-quiet">Copy</button>
+      </div>
+      <div class="mt-5 border-t border-slate-200 pt-4">
+        <form id="regenerate-api-key-form" action="/admin/profile/regenerate-api-key" method="POST" class="inline-block">
+          <button id="open-regenerate-modal" type="submit" class="btn btn-danger">
+            <%- include('../partials/icon', { name: 'fa-solid fa-rotate' }) %> Regenerate API key
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/admin/api-key-regenerate-modal') %>
+<%- include('../partials/admin/footer') %>

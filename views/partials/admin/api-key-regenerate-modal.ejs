@@ -1,0 +1,21 @@
+<div
+  id="regenerate-modal"
+  class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 p-4"
+>
+  <div class="panel max-w-md">
+    <div class="panel-head">
+      <span class="mx-auto mb-3.5 grid h-[52px] w-[52px] place-items-center rounded-2xl bg-red-50 text-xl text-red-600">
+        <%- include('../icon', { name: 'fa-solid fa-triangle-exclamation' }) %>
+      </span>
+      <h2 class="text-lg font-semibold tracking-tight text-slate-900">Regenerate API key?</h2>
+    </div>
+    <p class="text-[13px] text-slate-500">
+      The old key stops working immediately for any script or application using it.
+      This cannot be undone.
+    </p>
+    <div class="mt-6 flex justify-end gap-2">
+      <button id="cancel-regenerate" type="button" class="btn btn-quiet">Cancel</button>
+      <button id="confirm-regenerate" type="button" class="btn btn-danger">Regenerate</button>
+    </div>
+  </div>
+</div>

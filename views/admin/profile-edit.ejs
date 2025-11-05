@@ -1,0 +1,72 @@
+<%- include('../partials/admin/header') %> 
+<%- include('../partials/admin/page-head-end') %>
+
+<div class="space-y-6">
+  <% if (error) { %>
+    <div class="notice notice-error">
+      <%- include('../partials/icon', { name: 'fa-solid fa-circle-exclamation' }) %>
+      <span><%= error %></span>
+    </div>
+  <% } %>
+  <% if (success) { %>
+    <div class="notice notice-ok">
+      <%- include('../partials/icon', { name: 'fa-solid fa-circle-check' }) %>
+      <span><%= success %></span>
+    </div>
+  <% } %>
+
+  <div class="card">
+    <div class="card-head">
+      <%- include('../partials/icon', { name: 'fa-solid fa-envelope' }) %>
+      Update email
+    </div>
+    <div class="card-body">
+      <form action="/admin/profile/update-email" method="POST">
+        <div class="mb-4">
+          <label for="newEmail" class="field-label">New email address</label>
+          <input type="email" id="newEmail" name="newEmail" value="<%= email %>" required class="input" />
+        </div>
+        <div class="mb-4">
+          <label for="currentPasswordEmail" class="field-label">Current password</label>
+          <input type="password" id="currentPasswordEmail" name="currentPassword" required class="input" />
+        </div>
+        <div class="flex justify-end">
+          <button type="submit" class="btn btn-primary">Update email</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <%- include('../partials/icon', { name: 'fa-solid fa-lock' }) %>
+      Update password
+    </div>
+    <div class="card-body">
+      <form action="/admin/profile/update-password" method="POST">
+        <div class="mb-4">
+          <label for="currentPasswordNew" class="field-label">Current password</label>
+          <input type="password" id="currentPasswordNew" name="currentPassword" required class="input" />
+        </div>
+        <div class="mb-4">
+          <label for="newPassword" class="field-label">New password</label>
+          <input type="password" id="newPassword" name="newPassword" required minlength="6" class="input" />
+          <p class="help">At least six characters.</p>
+        </div>
+        <div class="mb-4">
+          <label for="confirmNewPassword" class="field-label">Confirm new password</label>
+          <input type="password" id="confirmNewPassword" name="confirmNewPassword" required minlength="6" class="input" />
+        </div>
+        <div class="flex justify-end">
+          <button type="submit" class="btn btn-primary">Update password</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="flex justify-end">
+    <a href="/admin/profile" class="btn btn-quiet">Back to profile</a>
+  </div>
+</div>
+
+<%- include('../partials/admin/footer') %>

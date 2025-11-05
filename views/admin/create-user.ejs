@@ -1,0 +1,56 @@
+<%- include('../partials/admin/header') %> 
+<%- include('../partials/admin/page-head-end') %>
+
+<div class="card">
+  <div class="card-body">
+    <form action="/admin/users/create" method="POST">
+      <% if (error) { %>
+        <div class="notice notice-error">
+          <%- include('../partials/icon', { name: 'fa-solid fa-circle-exclamation' }) %>
+          <span><%= error %></span>
+        </div>
+      <% } %>
+      <% if (success) { %>
+        <div class="notice notice-ok">
+          <%- include('../partials/icon', { name: 'fa-solid fa-circle-check' }) %>
+          <span><%= success %></span>
+        </div>
+      <% } %>
+
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div>
+          <label for="username" class="field-label">Username</label>
+          <input type="text" id="username" name="username" required class="input" />
+        </div>
+        <div>
+          <label for="email" class="field-label">Email</label>
+          <input type="email" id="email" name="email" required class="input" />
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <label for="password" class="field-label">Password</label>
+        <input type="password" id="password" name="password" required class="input" />
+      </div>
+
+      <div class="mt-4 toggle-row">
+        <label class="relative mt-0.5 inline-flex h-5 w-9 flex-shrink-0 cursor-pointer items-center">
+          <input type="checkbox" id="is_admin" name="is_admin" value="true" class="peer sr-only" aria-label="Administrator" />
+          <span class="absolute inset-0 rounded-full bg-slate-300 transition-colors peer-checked:bg-brand-600 peer-focus-visible:ring-2 peer-focus-visible:ring-brand-500 peer-focus-visible:ring-offset-2"></span>
+          <span class="relative h-4 w-4 translate-x-0.5 rounded-full bg-white shadow transition-transform peer-checked:translate-x-4"></span>
+        </label>
+        <div>
+          <div class="text-sm font-medium text-slate-900">Administrator</div>
+          <p class="mt-0.5 text-xs text-slate-500">Administrators can manage categories, languages, and other users.</p>
+        </div>
+      </div>
+
+      <div class="mt-6 flex items-center justify-end gap-2 border-t border-slate-200 pt-4">
+        <a href="/admin/users" class="btn btn-quiet">Cancel</a>
+        <button type="submit" class="btn btn-primary">Create user</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<%- include('../partials/admin/footer') %>
